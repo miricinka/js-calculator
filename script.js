@@ -15,20 +15,7 @@ class Calculator {
     }
     chooseOperation(operation){
         if(this.operation !== ''){
-            console.log('pocitam mezipocet')
-            if(this.operation === '+'){
-                this.count = Number(this.previousOperand) + Number(this.currentOperand);
-            }else if(this.operation === '-'){
-                this.count = Number(this.previousOperand) - Number(this.currentOperand);
-            }else if(this.operation === '*'){
-                this.count = this.previousOperand * this.currentOperand;
-            }else if(this.operation === '/'){
-                if(this.currentOperand === '0'){
-                    console.log("division by zero error");
-                    return;
-                }
-                this.count = this.previousOperand / this.currentOperand;
-            }
+            this.compute();
             this.previousOperand = this.count;
         }else{
             this.previousOperand = this.currentOperand;
@@ -37,7 +24,6 @@ class Calculator {
         this.currentOperand = '';
     }
     compute(){
-        console.log("compute");
         if(this.operation === '+'){
             this.count = Number(this.previousOperand) + Number(this.currentOperand);
         }else if(this.operation === '-'){
@@ -51,7 +37,6 @@ class Calculator {
             }
             this.count = this.previousOperand / this.currentOperand;
         }
-        console.log(this.count);
         this.currentOperand = String(this.count);
         this.previousOperand = '';
         this.operation = '';
