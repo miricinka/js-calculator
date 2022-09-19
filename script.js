@@ -14,13 +14,47 @@ class Calculator {
         this.currentOperand = this.currentOperand.substring(0, this.currentOperand.length - 1);
     }
     chooseOperation(operation){
-        console.log("Jsem v choose operation");
+        if(this.operation !== ''){
+            console.log('pocitam mezipocet')
+            if(this.operation === '+'){
+                this.count = Number(this.previousOperand) + Number(this.currentOperand);
+            }else if(this.operation === '-'){
+                this.count = Number(this.previousOperand) - Number(this.currentOperand);
+            }else if(this.operation === '*'){
+                this.count = this.previousOperand * this.currentOperand;
+            }else if(this.operation === '/'){
+                if(this.currentOperand === '0'){
+                    console.log("division by zero error");
+                    return;
+                }
+                this.count = this.previousOperand / this.currentOperand;
+            }
+            this.previousOperand = this.count;
+        }else{
+            this.previousOperand = this.currentOperand;
+        }
         this.operation = operation;
-        this.previousOperand = this.currentOperand;
         this.currentOperand = '';
     }
     compute(){
-
+        console.log("compute");
+        if(this.operation === '+'){
+            this.count = Number(this.previousOperand) + Number(this.currentOperand);
+        }else if(this.operation === '-'){
+            this.count = Number(this.previousOperand) - Number(this.currentOperand);
+        }else if(this.operation === '*'){
+            this.count = this.previousOperand * this.currentOperand;
+        }else if(this.operation === '/'){
+            if(this.currentOperand === '0'){
+                console.log("division by zero error");
+                return;
+            }
+            this.count = this.previousOperand / this.currentOperand;
+        }
+        console.log(this.count);
+        this.currentOperand = String(this.count);
+        this.previousOperand = '';
+        this.operation = '';
     }
     appendNumber(number){
         if(!(number === '.' && this.currentOperand.includes('.'))){
@@ -69,4 +103,5 @@ deleteButton.addEventListener('click', () => {
 
 equalsButton.addEventListener('click', () => {
     calculator.compute();
+    calculator.updateDisplay();
 })
